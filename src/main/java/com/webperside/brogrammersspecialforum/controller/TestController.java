@@ -13,7 +13,7 @@ public class TestController {
         return "<h1><i>Hello from the other side</i></h1>";
     }
 
-    @PostMapping("/auth")
+    @PostMapping("/token")
     public TokenResponseDto auth(@RequestBody TokenRequestDto tokenRequestDto) {
         TokenResponseDto result = new TokenResponseDto();
         result.setAccessToken(tokenRequestDto.getUsername() + tokenRequestDto.getPassword() + "ACCESS_TOKEN");
