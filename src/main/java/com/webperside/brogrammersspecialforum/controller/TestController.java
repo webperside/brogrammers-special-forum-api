@@ -14,10 +14,11 @@ public class TestController {
     }
 
     @PostMapping("/token")
-    public TokenResponseDto auth(@RequestBody TokenRequestDto tokenRequestDto) {
+    public TokenResponseDto auth(@RequestBody TokenRequestDto tokenRequestDto) throws InterruptedException {
         TokenResponseDto result = new TokenResponseDto();
         result.setAccessToken(tokenRequestDto.getUsername() + tokenRequestDto.getPassword() + "ACCESS_TOKEN");
         result.setRefreshToken(tokenRequestDto.getUsername() + tokenRequestDto.getPassword() + "REFRESH_TOKEN&REMEMBER_ME=" + tokenRequestDto.isRememberMe());
+//        Thread.sleep(5000);
         return result;
     }
 }
