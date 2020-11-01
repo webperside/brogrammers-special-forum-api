@@ -4,6 +4,11 @@ spring:
     username: ks3q5665krlj0b60
     password: zupsp3rwt0mgtsaf
     driver-class-name: com.mysql.cj.jdbc.Driver
+  hikari:
+    connection-timeout: 1000
+    maximum-pool-size: 3
+    max-idle: 5
+  type: com.zaxxer.hikari.HikariDataSource
 
   jpa:
     hibernate.ddl-auto: validate
