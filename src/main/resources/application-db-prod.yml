@@ -7,7 +7,7 @@ spring:
   hikari:
     connection-timeout: 1000
     maximum-pool-size: 3
-    max-idle: 5
+    max-idle: 1
   type: com.zaxxer.hikari.HikariDataSource
 
   jpa:
