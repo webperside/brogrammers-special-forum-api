@@ -10,14 +10,11 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class TokenRequestDto {
+public class RefreshTokenRequestDto {
 
     @ApiModelProperty(position = 1)
-    private String username;
+    private String refreshToken;
 
     @ApiModelProperty(position = 2)
-    private String password;
-
-    @ApiModelProperty(position = 3)
     private boolean rememberMe;
 }
