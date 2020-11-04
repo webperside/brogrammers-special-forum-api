@@ -1,7 +1,10 @@
 package com.webperside.brogrammersspecialforum.enums;
 
+import com.webperside.brogrammersspecialforum.exception.RestException;
+
 public enum Trend {
-    ;
+    NOT_TREND(0),
+    TREND(1);
 
     private final Byte value;
 
@@ -19,7 +22,6 @@ public enum Trend {
                 return trend;
             }
         }
-        return null;
-        //todo trendNotFound exception
+        throw new RestException(ErrorEnum.ENUM_NOT_FOUND_EXCEPTION);
     }
 }

@@ -1,5 +1,7 @@
 package com.webperside.brogrammersspecialforum.utils;
 
+import com.webperside.brogrammersspecialforum.enums.ErrorEnum;
+import com.webperside.brogrammersspecialforum.exception.RestException;
 import com.webperside.brogrammersspecialforum.models.User;
 import com.webperside.brogrammersspecialforum.repository.UserRepository;
 import com.webperside.brogrammersspecialforum.security.JwtUser;
@@ -25,8 +27,8 @@ public class UserUtils {
     // private util methods
 
     private static User getByUsername(String username) {
-        return userRepository.findByUsername(username) // todo custom exception
-                .orElseThrow(() -> new RuntimeException("username % not found"));
+        return userRepository.findByUsername(username)
+                .orElseThrow(() -> new RestException(ErrorEnum.USERNAME_NOT_FOUND_EXCEPTION,username));
     }
 
 

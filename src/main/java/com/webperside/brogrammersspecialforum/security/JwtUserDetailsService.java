@@ -1,6 +1,8 @@
 package com.webperside.brogrammersspecialforum.security;
 
+import com.webperside.brogrammersspecialforum.enums.ErrorEnum;
 import com.webperside.brogrammersspecialforum.enums.Role;
+import com.webperside.brogrammersspecialforum.exception.RestException;
 import com.webperside.brogrammersspecialforum.models.User;
 import com.webperside.brogrammersspecialforum.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -25,8 +27,8 @@ public class JwtUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
         User user = userRepository.findByUsername(s).orElseThrow(
-                () -> new UsernameNotFoundException("username % not found")
-        ); // todo custom exception
+                () -> new RestException(ErrorEnum.USERNAME_NOT_FOUND_EXCEPTION, s)
+        );
 
         return JwtUser.builder()
                 .username(user.getUsername())

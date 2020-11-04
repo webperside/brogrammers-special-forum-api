@@ -1,5 +1,7 @@
 package com.webperside.brogrammersspecialforum.enums;
 
+import com.webperside.brogrammersspecialforum.exception.RestException;
+
 public enum NotificationType {
 
     FOLLOW(0),
@@ -21,7 +23,6 @@ public enum NotificationType {
                 return type;
             }
         }
-        return null;
-        // todo notificationNotFound exception
+        throw new RestException(ErrorEnum.ENUM_NOT_FOUND_EXCEPTION);
     }
 }

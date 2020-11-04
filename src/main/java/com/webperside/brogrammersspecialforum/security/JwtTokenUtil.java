@@ -1,5 +1,7 @@
 package com.webperside.brogrammersspecialforum.security;
 
+import com.webperside.brogrammersspecialforum.enums.ErrorEnum;
+import com.webperside.brogrammersspecialforum.exception.RestException;
 import com.webperside.brogrammersspecialforum.models.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
@@ -84,15 +86,24 @@ public class JwtTokenUtil {
     }
 
     public boolean validateAccessToken(String token) {
-        Claims claims = getTokenBody(token);
 
-        return claims != null && !claims.getExpiration().before(new Date());// todo custom exception
+        try{
+            Claims claims = getTokenBody(token);
+
+            return claims != null && !claims.getExpiration().before(new Date());
+        } catch (Exception ex){
+            throw new RestException(ErrorEnum.ACCESS_TOKEN_EXPIRED_EXCEPTION);
+        }
     }
 
     public boolean validateRefreshToken(String token) {
-        Claims claims = getTokenBody(token);
+        try{
+            Claims claims = getTokenBody(token);
 
-        return claims != null && !claims.getExpiration().before(new Date());// todo custom exception
+            return claims != null && !claims.getExpiration().before(new Date());
+        } catch (Exception ex){
+            throw new RestException(ErrorEnum.REFRESH_TOKEN_EXPIRED_EXCEPTION);
+        }
     }
 
     public Authentication getAuthentication(String token) {
@@ -106,7 +117,7 @@ public class JwtTokenUtil {
         try {
             return Jwts.parser().setSigningKey(getPublicKey()).parseClaimsJws(token).getBody();
         } catch (JwtException ex) {
-            log.error(ex.getMessage());
+            log.error(ex.getMessage() + "salam");
             throw ex;
         }
     }

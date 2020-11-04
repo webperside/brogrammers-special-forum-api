@@ -3,6 +3,8 @@ package com.webperside.brogrammersspecialforum.service.impl;
 import com.webperside.brogrammersspecialforum.dto.request.RefreshTokenRequestDto;
 import com.webperside.brogrammersspecialforum.dto.request.TokenRequestDto;
 import com.webperside.brogrammersspecialforum.dto.response.TokenResponseDto;
+import com.webperside.brogrammersspecialforum.enums.ErrorEnum;
+import com.webperside.brogrammersspecialforum.exception.RestException;
 import com.webperside.brogrammersspecialforum.models.User;
 import com.webperside.brogrammersspecialforum.models.UserAuthorization;
 import com.webperside.brogrammersspecialforum.repository.UserAuthorizationRepository;
@@ -55,7 +57,7 @@ public class AuthServiceImpl implements AuthService {
     public TokenResponseDto refreshToken(RefreshTokenRequestDto refreshTokenRequestDto) {
         userAuthorizationRepository.findByRefreshToken(
                 DigestUtils.md5DigestAsHex(refreshTokenRequestDto.getRefreshToken().getBytes()))
-                .orElseThrow(() -> new RuntimeException("fuck this shit")); //todo custom exception
+                .orElseThrow(() -> new RestException(ErrorEnum.REFRESH_TOKEN_EXPIRED_EXCEPTION));
 
         if (jwtTokenUtil.validateRefreshToken(refreshTokenRequestDto.getRefreshToken())) {
             String username = jwtTokenUtil.getUsernameFromToken(refreshTokenRequestDto.getRefreshToken());

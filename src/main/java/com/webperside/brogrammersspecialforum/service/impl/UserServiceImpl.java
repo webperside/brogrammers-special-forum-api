@@ -1,7 +1,9 @@
 package com.webperside.brogrammersspecialforum.service.impl;
 
 import com.webperside.brogrammersspecialforum.dto.request.CreateUserDto;
+import com.webperside.brogrammersspecialforum.enums.ErrorEnum;
 import com.webperside.brogrammersspecialforum.enums.Role;
+import com.webperside.brogrammersspecialforum.exception.RestException;
 import com.webperside.brogrammersspecialforum.models.User;
 import com.webperside.brogrammersspecialforum.repository.UserRepository;
 import com.webperside.brogrammersspecialforum.service.UserService;
@@ -36,8 +38,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getByUsername(String username) {
-        return userRepository.findByUsername(username) // todo custom exception
-                .orElseThrow(() -> new UsernameNotFoundException("username % not found"));
+        return userRepository.findByUsername(username)
+                .orElseThrow(() -> new RestException(ErrorEnum.USERNAME_NOT_FOUND_EXCEPTION,username));
     }
 
     // private util methods

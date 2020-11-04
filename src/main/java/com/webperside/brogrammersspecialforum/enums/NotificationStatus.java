@@ -1,5 +1,7 @@
 package com.webperside.brogrammersspecialforum.enums;
 
+import com.webperside.brogrammersspecialforum.exception.RestException;
+
 public enum NotificationStatus {
     NOT_READ(0),
     READ(1);
@@ -20,7 +22,6 @@ public enum NotificationStatus {
                 return status;
             }
         }
-        return null;
-        //todo notificationStatusNotFound exception
+        throw new RestException(ErrorEnum.ENUM_NOT_FOUND_EXCEPTION);
     }
 }

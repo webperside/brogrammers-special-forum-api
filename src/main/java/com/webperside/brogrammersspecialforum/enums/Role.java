@@ -1,5 +1,7 @@
 package com.webperside.brogrammersspecialforum.enums;
 
+import com.webperside.brogrammersspecialforum.exception.RestException;
+
 public enum Role {
     ADMIN(0, "ROLE_ADMIN"),
     USER(1, "ROLE_USER");
@@ -26,7 +28,6 @@ public enum Role {
                 return role;
             }
         }
-        return null;
-        //todo roleNotFound exception
+        throw new RestException(ErrorEnum.ENUM_NOT_FOUND_EXCEPTION);
     }
 }
