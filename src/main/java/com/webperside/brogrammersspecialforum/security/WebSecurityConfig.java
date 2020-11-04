@@ -58,7 +58,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/configuration/security",
                         "/swagger-ui.html",
                         "/webjars/**").permitAll()
-                .antMatchers("/sign-up","/token","/refresh-token").permitAll()
+                .antMatchers("/sign-up","/token","/refresh-token","/cronjob").permitAll()
                 .anyRequest().authenticated().and()
                 .logout().logoutUrl("/api/logout").and()
                 .exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint).and()
