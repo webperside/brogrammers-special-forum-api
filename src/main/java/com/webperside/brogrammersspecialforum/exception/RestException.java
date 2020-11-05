@@ -14,6 +14,7 @@ public class RestException extends RuntimeException{
     private HttpStatus httpStatus;
     private Integer code;
     private String message;
+    private String target;
 
     public RestException(ErrorEnum errorEnum) {
         this.httpStatus = errorEnum.getHttpStatus();
@@ -21,10 +22,10 @@ public class RestException extends RuntimeException{
         this.message = errorEnum.getMessage();
     }
 
-    public RestException(ErrorEnum errorEnum, String extraData) {
-        String extraMessage = String.format(errorEnum.getMessage(), extraData);
+    public RestException(ErrorEnum errorEnum, String target) {
         this.httpStatus = errorEnum.getHttpStatus();
         this.code = errorEnum.getCode();
-        this.message = extraMessage;
+        this.message = errorEnum.getMessage();
+        this.target = target;
     }
 }
