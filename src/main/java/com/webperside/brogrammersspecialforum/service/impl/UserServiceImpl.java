@@ -23,6 +23,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Integer createUser(CreateUserDto createUserDto) {
+
+        if(userRepository.existsUserByUsername(createUserDto.getUsername())){
+            throw new RestException(ErrorEnum.USERNAME_ALREADY_EXIST_EXCEPTION, createUserDto.getUsername());
+        }
+
         User user = User.builder()
                 .fullName(createUserDto.getFullName())
                 .username(createUserDto.getUsername())

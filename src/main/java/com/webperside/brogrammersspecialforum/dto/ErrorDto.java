@@ -21,6 +21,8 @@ public class ErrorDto {
         messages.put(ErrorEnum.ENUM_NOT_FOUND_EXCEPTION.getCode(),"Seçilən məlumat mövcud deyil");
         messages.put(ErrorEnum.USERNAME_NOT_FOUND_EXCEPTION.getCode(),"%s adlı istifadəçi mövcud deyil");
         messages.put(ErrorEnum.USER_NOT_FOUND_EXCEPTION.getCode(),"%s adlı istifadəçi mövcud deyil");
+        messages.put(ErrorEnum.PASSWORD_NOT_EQUALS_EXCEPTION.getCode(), "Şifrə düzgün daxil edilməyib");
+        messages.put(ErrorEnum.USERNAME_ALREADY_EXIST_EXCEPTION.getCode(), "%s adlı istifadəçi artıq mövcuddur");
     }
 
 

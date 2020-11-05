@@ -1,4 +1,4 @@
 spring:
   profiles:
-    active: db-prod, property-prod
-#    active: db-dev, property-dev
+#    active: db-prod, property-prod
+    active: db-dev, property-dev

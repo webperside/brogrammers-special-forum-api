@@ -124,7 +124,7 @@ public class AuthServiceImpl implements AuthService {
                     tokenRequestDto.getPassword()
             ));
         } catch (AuthenticationException ex) {
-            log.error(ex.getMessage());
+            throw new RestException(ErrorEnum.PASSWORD_NOT_EQUALS_EXCEPTION);
         }
     }
 }
