@@ -36,9 +36,9 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public TokenResponseDto getToken(TokenRequestDto tokenRequestDto) {
-        authenticate(tokenRequestDto);
-
         User user = userService.getByUsername(tokenRequestDto.getUsername());
+
+        authenticate(tokenRequestDto);
 
         String accessToken = jwtTokenUtil.createAccessToken(user);
         String refreshToken = jwtTokenUtil.createRefreshToken(user, tokenRequestDto.isRememberMe());
