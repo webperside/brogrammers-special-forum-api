@@ -3,12 +3,15 @@ package com.webperside.brogrammersspecialforum.security;
 import com.webperside.brogrammersspecialforum.enums.ErrorEnum;
 import com.webperside.brogrammersspecialforum.exception.RestException;
 import com.webperside.brogrammersspecialforum.models.User;
+import com.webperside.brogrammersspecialforum.models.UserAuthorization;
+import com.webperside.brogrammersspecialforum.repository.UserAuthorizationRepository;
 import com.webperside.brogrammersspecialforum.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.DigestUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -24,6 +27,7 @@ import java.io.IOException;
 public class JwtRequestFilter extends OncePerRequestFilter {
 
     private final UserRepository userRepository;
+    private final UserAuthorizationRepository userAuthorizationRepository;
 
     private final JwtTokenUtil jwtTokenUtil;
 
@@ -57,8 +61,10 @@ public class JwtRequestFilter extends OncePerRequestFilter {
         filterChain.doFilter(httpServletRequest, httpServletResponse);
     }
 
-    private boolean checkAccessTokenIsExist(String token, User user) {
-        return user.getUserAuthorizations().stream()
-                .anyMatch(ua -> ua.getAccessToken().equals(DigestUtils.md5DigestAsHex(token.getBytes())));
+    public boolean checkAccessTokenIsExist(String token, User user) {
+        return userAuthorizationRepository.findAllByUserId(user.getId()).stream()
+                .anyMatch(ua ->
+                        ua.getAccessToken().equals(DigestUtils.md5DigestAsHex(token.getBytes()))
+                );
     }
 }
