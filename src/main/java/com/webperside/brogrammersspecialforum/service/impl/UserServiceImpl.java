@@ -1,6 +1,7 @@
 package com.webperside.brogrammersspecialforum.service.impl;
 
 import com.webperside.brogrammersspecialforum.dto.request.CreateUserDto;
+import com.webperside.brogrammersspecialforum.dto.response.UserShortInfoDto;
 import com.webperside.brogrammersspecialforum.enums.ErrorEnum;
 import com.webperside.brogrammersspecialforum.enums.Role;
 import com.webperside.brogrammersspecialforum.exception.RestException;
@@ -8,11 +9,12 @@ import com.webperside.brogrammersspecialforum.models.User;
 import com.webperside.brogrammersspecialforum.repository.UserRepository;
 import com.webperside.brogrammersspecialforum.service.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Random;
+
+import static com.webperside.brogrammersspecialforum.utils.UserUtils.CURRENT_USER;
 
 @Service
 @RequiredArgsConstructor
@@ -45,6 +47,11 @@ public class UserServiceImpl implements UserService {
     public User getByUsername(String username) {
         return userRepository.findByUsername(username)
                 .orElseThrow(() -> new RestException(ErrorEnum.USERNAME_NOT_FOUND_EXCEPTION,username));
+    }
+
+    @Override
+    public UserShortInfoDto getUserShortInfo() {
+        return UserShortInfoDto.fromEntity(CURRENT_USER());
     }
 
     // private util methods
