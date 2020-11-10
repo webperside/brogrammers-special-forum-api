@@ -7,6 +7,8 @@ import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
 
+import java.util.List;
+
 import static javax.persistence.FetchType.LAZY;
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -32,4 +34,8 @@ public class Category extends BaseEntity {
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "created_by")
     private User createdBy;
+
+    @OneToMany(mappedBy = "category", fetch = LAZY)
+    private List<TitleCategory> titles;
+
 }

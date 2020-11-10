@@ -57,7 +57,6 @@ public class JwtRequestFilter extends OncePerRequestFilter {
             log.error(ex.getMessage());
         }
 
-
         filterChain.doFilter(httpServletRequest, httpServletResponse);
     }
 
