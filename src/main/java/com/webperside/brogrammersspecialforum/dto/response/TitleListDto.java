@@ -43,6 +43,7 @@ public class TitleListDto {
                 .user(TitleList_UserDto.builder()
                         .avatar(title.getUser().getAvatar())
                         .username(title.getUser().getUsername())
+                        .fullName(title.getUser().getFullName())
                         .build()
                 )
                 .build();
@@ -54,5 +55,6 @@ public class TitleListDto {
     private static class TitleList_UserDto{
         private String avatar;
         private String username;
+        private String fullName;
     }
 }
