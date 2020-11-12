@@ -1,10 +1,11 @@
 package com.webperside.brogrammersspecialforum.service;
 
 import com.webperside.brogrammersspecialforum.dto.response.CategoryDto;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+
+import java.util.List;
 
 public interface CategoryService {
 
-    Page<CategoryDto> getAll(Pageable pageable);
+    List<CategoryDto> getAll(Sort sort);
 }

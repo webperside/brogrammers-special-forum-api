@@ -8,6 +8,8 @@ import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
 
+import java.util.List;
+
 import static javax.persistence.FetchType.LAZY;
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -39,4 +41,10 @@ public class Title extends BaseEntity {
 
     @Column(name = "is_trend", nullable = false, columnDefinition = "tinyint(4)")
     private Trend isTrend;
+
+    @OneToMany(mappedBy = "title", fetch = LAZY)
+    private List<TitleCategory> categories;
+
+    @OneToMany(mappedBy = "title", fetch = LAZY)
+    private List<Reply> replies;
 }

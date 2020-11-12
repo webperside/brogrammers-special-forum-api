@@ -22,13 +22,20 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @RequiredArgsConstructor
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
+    private final static String[] permitAllConfigUrls = new String[]{
+            "/v2/api-docs", "/configuration/ui", "/swagger-resources/**",
+            "/configuration/security", "/swagger-ui.html", "/webjars/**",
+            "/","/index"
+    };
+
+    private final static String[] permitAllUrls = new String[]{
+            "/sign-up", "/token","/refresh-token","/cronjob","/categories",
+            "/titles", "/titles/trend"
+    };
+
 
     private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
-
-
     private final UserDetailsService jwtUserDetailsService;
-
-
     private final JwtRequestFilter jwtRequestFilter;
 
     @Bean
@@ -53,13 +60,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .cors().and()
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/v2/api-docs",
-                        "/configuration/ui",
-                        "/swagger-resources/**",
-                        "/configuration/security",
-                        "/swagger-ui.html",
-                        "/webjars/**","/","/index").permitAll()
-                .antMatchers("/sign-up","/token","/refresh-token","/cronjob","/categories").permitAll()
+                .antMatchers(permitAllConfigUrls).permitAll()
+                .antMatchers(permitAllUrls).permitAll()
                 .anyRequest().authenticated().and()
                 .logout().logoutUrl("/api/logout").and()
                 .exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint).and()
