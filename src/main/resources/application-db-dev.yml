@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3307/bsf_db?createDatabaseIfNotExist=true&useSSL=true&serverTimezone=Asia/Baku&useUnicode=true&characterEncoding=UTF-8
+    url: jdbc:mysql://localhost:3306/bsf_db?createDatabaseIfNotExist=true&useSSL=true&serverTimezone=Asia/Baku&useUnicode=true&characterEncoding=UTF-8
     username: root
     password: hamid318
     driver-class-name: com.mysql.cj.jdbc.Driver

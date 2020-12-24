@@ -54,6 +54,13 @@ public class UserServiceImpl implements UserService {
         return UserShortInfoDto.fromEntity(CURRENT_USER());
     }
 
+    @Override
+    public User getById(Integer id) {
+        return userRepository.findById(id).orElseThrow(
+                () -> new RestException(ErrorEnum.USER_NOT_FOUND_EXCEPTION)
+        );
+    }
+
     // private util methods
 
     private String generateAvatar() {

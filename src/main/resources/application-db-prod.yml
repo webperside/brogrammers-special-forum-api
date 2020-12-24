@@ -1,14 +1,9 @@
 spring:
   datasource:
-    url: jdbc:mysql://ks3q5665krlj0b60:zupsp3rwt0mgtsaf@d1kb8x1fu8rhcnej.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/udarmrphs385wh69?createDatabaseIfNotExist=true&useSSL=true&serverTimezone=Asia/Baku&useUnicode=true&characterEncoding=UTF-8
-    username: ks3q5665krlj0b60
-    password: zupsp3rwt0mgtsaf
+    url: jdbc:mysql://localhost:3306/bsf_db?createDatabaseIfNotExist=true&useSSL=true&serverTimezone=Asia/Baku&useUnicode=true&characterEncoding=UTF-8
+    username: root
+    password: hamid318
     driver-class-name: com.mysql.cj.jdbc.Driver
-  hikari:
-    connection-timeout: 1000
-    maximum-pool-size: 3
-    max-idle: 5
-  type: com.zaxxer.hikari.HikariDataSource
 
   jpa:
     hibernate.ddl-auto: validate
